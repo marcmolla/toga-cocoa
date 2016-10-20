@@ -56,4 +56,8 @@ class ImageView(ImageViewInterface, WidgetMixin):
         if image:
             self._impl.image = image._impl
         else:
-            self._impl.image = NSImage.alloc().initWithSize_(NSSize(self.width, self.height))
+            width = height = 0
+            if self.style and self.style.width and self.style.height:
+                width = self.style.width
+                height = self.style.height
+            self._impl.image = NSImage.alloc().initWithSize_(NSSize(width, height))
